@@ -108,7 +108,6 @@ img {
 /* CARDS */
 .card {
   margin: 20px;
-  flex: 0 1 300px;
   border: 7px double var(--dark);
   border-radius: 10px;
   background-color: var(--light);
@@ -131,16 +130,30 @@ img {
 .card header {
   color: var(--light);
   font-weight: bold;
-  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  vertical-align: baseline;
   margin: 0;
   background-color: var(--tertiary);
-  padding: 0.625rem;
+  padding: 0.625rem 1rem;
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
+#card-h3,
+#card-p {
+  margin: 0;
+}
+
+#card-p  {
+  font-weight: normal;
+
+}
+
+
 .card-body {
   font-size: 1.4rem;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
 }
 

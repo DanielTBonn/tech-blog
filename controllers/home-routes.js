@@ -1,9 +1,11 @@
 const router = require('express').Router();
-// const { Gallery, Painting } = require('../models');
+const { User, BlogPost } = require('../models');
 
 // GET all galleries for homepage
 router.get('/', async (req, res) => {
   try {
+
+    const blogPostData = await BlogPost.findAll({})
     // const dbGalleryData = await Gallery.findAll({
     //   include: [
     //     {
@@ -13,16 +15,19 @@ router.get('/', async (req, res) => {
     //   ],
     // });
 
+    const blogPosts = blogPostData.map((blogpost) =>
+      blogpost.get({ plain: true})
+    );
     // const galleries = dbGalleryData.map((gallery) =>
     //   gallery.get({ plain: true })
     // );
     // TODO: Send over the 'loggedIn' session variable to the 'homepage' template
     res.render('homepage'
-    // , 
-    // {
-    //   galleries,
+    , 
+    {
+      blogPosts,
     //   loggedIn: req.session.loggedIn
-    // }
+    }
     );
   } catch (err) {
     console.log(err);

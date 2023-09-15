@@ -1,27 +1,16 @@
 const router = require('express').Router();
 const { User, BlogPost } = require('../models');
 
-// GET all galleries for homepage
+// GET all blogpost for homepage
 router.get('/', async (req, res) => {
   try {
 
     const blogPostData = await BlogPost.findAll({})
-    // const dbGalleryData = await Gallery.findAll({
-    //   include: [
-    //     {
-    //       model: Painting,
-    //       attributes: ['filename', 'description'],
-    //     },
-    //   ],
-    // });
 
     const blogPosts = blogPostData.map((blogpost) =>
       blogpost.get({ plain: true})
     );
-    // const galleries = dbGalleryData.map((gallery) =>
-    //   gallery.get({ plain: true })
-    // );
-    // TODO: Send over the 'loggedIn' session variable to the 'homepage' template
+
     res.render('homepage'
     , 
     {

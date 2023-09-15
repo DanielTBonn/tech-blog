@@ -19,10 +19,10 @@ BlogPost.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        datePosted: {
+        date_posted: {
             type: DataTypes.DATE,
         },
-        userId: {
+        user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
@@ -31,7 +31,6 @@ BlogPost.init(
         }
     },
     {
-
         sequelize,
         timestamps: false,
         freezeTableName: true,

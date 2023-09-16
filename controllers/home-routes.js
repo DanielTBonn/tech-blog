@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, BlogPost, Comment } = require('../models');
 const { getAuthor } = require('../utils/helpers');
-const withAuth = require('../utils/auth')
+const withAuth  = require('../utils/auth')
 
 // GET all blogpost for homepage
 router.get('/', async (req, res) => {
@@ -48,10 +48,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET user posts
-router.get('/users/:id', async (req, res) => {
+// GET current user posts
+router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id, {
+    const userData = await User.findByPk(req.session.user_id, {
       include: [
         {
           model: BlogPost,

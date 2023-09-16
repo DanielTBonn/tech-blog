@@ -15,24 +15,28 @@
   </header>
   <nav>
     <a href="/">Home</a>
-    <!-- {{#if loggedIn}}
+    <a href="/">Dashboard</a>
+
+    {{#if loggedIn}}
     <button id="logout" class="btn-no-style">Logout</button>
     {{else}}
     <a href="/login">Login</a>
-    {{/if}} -->
+    {{/if}}
   </nav>
     <div class="card">
       <header class="card"><h3 id="card-h3">This is the header!</h3><p id="card-p">Hello There by General Kenobi</p></header>
       <div class="card-body">Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!
         Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! </div>
+    
+      <footer>Content!</footer>
     </div>
     
     {{{ body }}}
     
     
-  <!-- {{#if loggedIn}}
+  {{#if loggedIn}}
   <script src="/js/logout.js"></script>
-  {{/if}} -->
+  {{/if}}
 </body>
 
 </html>

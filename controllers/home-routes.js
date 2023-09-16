@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, BlogPost, Comment } = require('../models');
+const { getAuthor } = require('../utils/helpers');
 
 // GET all blogpost for homepage
 router.get('/', async (req, res) => {
@@ -22,14 +23,16 @@ router.get('/', async (req, res) => {
           ]
         }
       ]
-    })
+    });
 
     const blogPosts = blogPostData.map((blogpost) =>
-      blogpost.get({ plain: true})
+    blogpost.get({ plain: true})
     );
-
-    console.log(blogPosts);
-    console.log(blogPosts[0].comments);
+    
+    // console.log(blogPosts);
+    // console.log(blogPosts[0].comments[0].user_id);
+    // const author =  await getAuthor(blogPosts[0].comments[0].user_id);
+    // console.log('AUTHOR: ',author)
 
     res.render('homepage'
     , 
@@ -88,14 +91,15 @@ router.get('/users/:id', async (req, res) => {
 // });
 
 // // Login route
-// router.get('/login', (req, res) => {
-//   // If the user is already logged in, redirect to the homepage
-//   if (req.session.loggedIn) {
-//     res.redirect('/');
-//     return;
-//   }
-//   // Otherwise, render the 'login' template
-//   res.render('login');
-// });
+router.get('/login', (req, res) => {
+  // TODO: Add a comment describing the functionality of this if statement
+  // redirects you to homepage if logged_in is true, otherwise renders /login page
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
+});
 
 module.exports = router;

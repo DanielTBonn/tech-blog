@@ -5,7 +5,16 @@ const { User, BlogPost } = require('../models');
 router.get('/', async (req, res) => {
   try {
 
-    const blogPostData = await BlogPost.findAll({})
+    const blogPostData = await BlogPost.findAll({
+      include : [
+        {
+          model: User,
+          attributes: [
+            'name'
+          ]
+        }
+      ]
+    })
 
     const blogPosts = blogPostData.map((blogpost) =>
       blogpost.get({ plain: true})
@@ -24,33 +33,37 @@ router.get('/', async (req, res) => {
   }
 });
 
-// // GET one gallery
-// router.get('/gallery/:id', async (req, res) => {
-//   try {
-//     const dbGalleryData = await Gallery.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: Painting,
-//           attributes: [
-//             'id',
-//             'title',
-//             'artist',
-//             'exhibition_date',
-//             'filename',
-//             'description',
-//           ],
-//         },
-//       ],
-//     });
+// GET user posts
+router.get('/users/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      include: [
+        {
+          model: BlogPost,
+          attributes: [
+            'id',
+            'title',
+            'content',
+            'date_posted',
+          ],
+        },
+      ],
+    });
 
-//     const gallery = dbGalleryData.get({ plain: true });
-//     // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
-//     res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
+   
+
+
+    const user = userData.get({ plain: true });
+    console.log(user);
+    // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
+    res.render('dashboard', { 
+      user
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // // GET one painting
 // router.get('/painting/:id', async (req, res) => {

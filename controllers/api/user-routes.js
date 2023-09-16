@@ -7,6 +7,8 @@ router.post('/login', async (req, res) => {
     // retrieves the user with a unique email in the database
     const userData = await User.findOne({ where: { username: req.body.username } });
 
+    console.log(userData);
+    console.log(userData.username)
     if (!userData) {
       res
         .status(400)
@@ -17,13 +19,14 @@ router.post('/login', async (req, res) => {
     // TODO: Add a comment describing the functionality of this expression
     // checks the password inputted by the user against the actual password in the database
     const validPassword = await userData.checkPassword(req.body.password);
-
+    console.log(validPassword)
     if (!validPassword) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
+    
 
     // TODO: Add a comment describing the functionality of this method
     // saves the data to session storage to be used for further functionality

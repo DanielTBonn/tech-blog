@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, BlogPost, Comment } = require('../models');
 const { getAuthor } = require('../utils/helpers');
+const withAuth = require('../utils/auth')
 
 // GET all blogpost for homepage
 router.get('/', async (req, res) => {
@@ -38,7 +39,7 @@ router.get('/', async (req, res) => {
     , 
     {
       blogPosts,
-    //   loggedIn: req.session.loggedIn
+      logged_in: req.session.logged_in
     }
     );
   } catch (err) {
@@ -68,7 +69,8 @@ router.get('/users/:id', async (req, res) => {
     console.log(user);
     // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
     res.render('dashboard', { 
-      user
+      user,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     console.log(err);

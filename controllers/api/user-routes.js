@@ -1,6 +1,21 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+router.get('/', async (req, res) => {
+    try {
+
+        const userData = await User.findAll();
+        // const users = userData.get({ plain: true});
+        // console.log(users);
+        res.status(200).json(userData);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log('An Error Occured.');
+        console.log(err);
+    }
+    
+})
+
 router.post('/login', async (req, res) => {
   try {
     // TODO: Add a comment describing the functionality of this expression
@@ -26,7 +41,7 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-    
+
 
     // TODO: Add a comment describing the functionality of this method
     // saves the data to session storage to be used for further functionality
@@ -41,6 +56,19 @@ router.post('/login', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.post('/', async (req, res) => {
+    try {
+        const userData = await User.create(req.body);
+        console.log(req.body)
+        console.log(`Succesfully created user ${req.params.username}!`);
+        res.status(200).json(userData);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log('An Error Occured.');
+        console.log(err);
+    }
+})
 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {

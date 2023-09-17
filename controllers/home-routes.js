@@ -67,8 +67,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
     console.log(user);
-    // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
     res.render('dashboard', { 
+      // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
       user,
       logged_in: req.session.logged_in
     });
@@ -78,6 +78,39 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+router.get('/blogpost/:id', withAuth, async (req, res) => {
+  try {
+    const blogPostData = await BlogPost.findByPk(req.params.id, {
+      include : [
+        {
+          model: User,
+          attributes: [
+            'username'
+          ]
+        },
+        {
+          model: Comment,
+          attributes: [
+            'content',
+            'date_posted',
+            'user_id'
+          ]
+        }
+      ]
+    });
+    const blogPost = blogPostData.get({ plain: true});
+
+    res.render('blogpost', {
+      blogPost,
+      logged_in: req.session.logged_in
+    })
+    // res.status(200).json(blogPost)
+  } catch (err) {
+    res.status(500).json(err);
+    console.log('There was an error.')
+    console.log(err);
+  }
+})
 // // GET one painting
 // router.get('/painting/:id', async (req, res) => {
 //   try {

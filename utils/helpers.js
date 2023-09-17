@@ -6,8 +6,9 @@ module.exports = {
         const userData = await User.findByPk(user_id, {
             attributes: ['username']
         })
-        const author = userData.get({ plain: true})
-        return author.username;
+        // const author = userData.get({ plain: true});
+        // return author.username;
+        console.log(userData)
     }
 
 };

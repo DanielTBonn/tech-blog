@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, BlogPost, Comment } = require('../../models');
 
 router.get('/', async (req, res) => {
     try {
@@ -34,7 +34,6 @@ router.post('/login', async (req, res) => {
     // TODO: Add a comment describing the functionality of this expression
     // checks the password inputted by the user against the actual password in the database
     const validPassword = await userData.checkPassword(req.body.password);
-    console.log(validPassword)
     if (!validPassword) {
       res
         .status(400)
@@ -81,5 +80,25 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+router.post('/comment', async (req, res) => {
+    try {
+        const commentData = await Comment.create({
+            content: req.body.comment,
+            date_posted: '9/14/2023',
+            user_id: req.session.user_id,
+            blogpost_id: req.body.blogId
+        });
+        console.log(req.body);
+        res.status(200).json(commentData);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log('An Error Occured.');
+        console.log(err);
+        console.log(req.body);
+    }
+    
+    
+})
 
 module.exports = router;

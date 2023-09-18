@@ -4,9 +4,11 @@ const blogPostFormHandler = async (event) => {
     const title = document.querySelector('#title-content').value.trim();
     const content = document.querySelector('#body-content').value.trim();
 
+    console.log('title: ', title)
+    console.log('content: ', content)
 
-    if (title) {
-        const response = await fetch('/api/users/comment', {
+    if (title && content) {
+        const response = await fetch('/api/users/blogpost', {
             method: 'POST',
             body: JSON.stringify({ title, content }),
             headers: { 'Content-Type': 'application/json' },
@@ -14,7 +16,6 @@ const blogPostFormHandler = async (event) => {
 
         if (response.ok) {
             console.log("Successfully created a blogpost");
-            window.location = currentUrl;
         } else {
             alert('Could not create blogpost');
         }

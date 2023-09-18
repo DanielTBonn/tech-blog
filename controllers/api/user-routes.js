@@ -96,8 +96,24 @@ router.post('/comment', async (req, res) => {
         console.log(err);
         console.log(req.body);
     }
-    
-    
+     
+})
+
+router.post('/blogpost', async (req, res) => {
+  try {
+    const blogPostData = await BlogPost.create({
+      title: req.body.title,
+      content: req.body.content,
+      date_posted: '9/14/2023',
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(blogPostData);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log('An Error Occured.');
+    console.log(err);
+    console.log(req.body);
+  }
 })
 
 module.exports = router;

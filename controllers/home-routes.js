@@ -125,6 +125,16 @@ router.get('/blogpost/:id', withAuth, async (req, res) => {
 //   }
 // });
 
+router.get('/addblogpost', withAuth, async(req, res) => {
+  try {
+    res.render('addblogpost');
+  } catch (err) {
+    res.status(500).json(err);
+    console.log('There was an error.')
+    console.log(err);
+  }
+})
+
 // // Login route
 router.get('/login', (req, res) => {
   // TODO: Add a comment describing the functionality of this if statement

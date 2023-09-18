@@ -66,7 +66,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-    console.log(user);
+    // console.log(user);
     res.render('dashboard', { 
       // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
       user,

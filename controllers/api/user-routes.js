@@ -22,8 +22,8 @@ router.post('/login', async (req, res) => {
     // retrieves the user with a unique email in the database
     const userData = await User.findOne({ where: { username: req.body.username } });
 
-    console.log(userData);
-    console.log(userData.username)
+    // console.log(userData);
+    // console.log(userData.username)
     if (!userData) {
       res
         .status(400)
@@ -89,7 +89,6 @@ router.post('/comment', async (req, res) => {
             user_id: req.session.user_id,
             blogpost_id: req.body.blogId
         });
-        console.log(req.body);
         res.status(200).json(commentData);
     } catch (err) {
         res.status(500).json(err);

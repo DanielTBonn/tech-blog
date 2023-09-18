@@ -8,7 +8,7 @@ module.exports = {
         })
         // const author = userData.get({ plain: true});
         // return author.username;
-        console.log(userData)
+        // console.log(userData)
     }
 
 };

@@ -1,0 +1,15 @@
+<div class="card" id="{{id}}">
+<div class="info-storage" id="{{id}}"></div>
+        <header class="card"><h3 id="card-h3">{{blogPost.title}}</h3><p id="card-p">Posted by place_holder on {{blogPost.date_posted}}</p></header>
+        <div class="card-body">{{blogPost.content}}</div>
+        {{#if blogPost.comments}}
+        <footer>
+            {{#each blogPost.comments as |comment|}}
+            <p>{{comment.content}} {{comment.date_posted}} by {{getAuthor comment.user_id}}</p>
+            {{/each}}
+        </footer>
+        {{/if}} 
+    {{#if blogPost}}
+    {{> comment-form}}
+    {{/if}}
+</div>

@@ -8,8 +8,8 @@ const blogPostFormHandler = async (event) => {
     console.log('content: ', content)
 
     if (title && content) {
-        const response = await fetch('/api/blogpost/addblogpost', {
-            method: 'POST',
+        const response = await fetch('/api/blogpost/updateblogpost', {
+            method: 'PUT',
             body: JSON.stringify({ title, content }),
             headers: { 'Content-Type': 'application/json' },
         });

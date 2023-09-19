@@ -5,7 +5,7 @@
         {{#if blogPost.comments}}
         <footer>
             {{#each blogPost.comments as |comment|}}
-            <p>{{comment.content}} {{comment.date_posted}} by {{getAuthor comment.user_id}}</p>
+            <p>{{comment.content}} {{format_date comment.date_posted}} by {{getAuthor comment.user_id}}</p>
             {{/each}}
         </footer>
         {{/if}} 

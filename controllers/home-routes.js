@@ -135,9 +135,33 @@ router.get('/addblogpost', withAuth, async(req, res) => {
   }
 })
 
-router.get('/updateblogpost', withAuth, async(req, res) => {
+router.get('/updateblogpost/:id', withAuth, async(req, res) => {
   try {
-    res.render('updateblogpost');
+    const blogPostData = await BlogPost.findByPk(req.params.id, {
+      include : [
+        {
+          model: User,
+          attributes: [
+            'username'
+          ]
+        },
+        {
+          model: Comment,
+          attributes: [
+            'content',
+            'date_posted',
+            'user_id'
+          ]
+        }
+      ]
+    });
+    const blogPost = blogPostData.get({ plain: true});
+
+    res.render('updateblogpost',
+    {
+      blogPost,
+      logged_in: req.session.logged_in
+    });
   } catch (err) {
     res.status(500).json(err);
     console.log('There was an error.')

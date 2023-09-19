@@ -55,6 +55,14 @@ try {
         id: req.body.id
         }
     });
+
+    if (!blogPostData) {
+        res.status(404).json({"message": "No blogposts with this id." });
+        return;
+      }
+      console.log("Successfully updated!")
+      res.status(200).json(blogPostData);
+
 } catch (err) {
     res.status(500).json(err);
     console.log('An Error Occured.');

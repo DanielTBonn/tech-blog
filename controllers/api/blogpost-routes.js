@@ -1,6 +1,32 @@
 const router = require('express').Router();
 const { BlogPost } = require('../../models');
 
+
+
+router.get('/', async (req, res) => {
+    try {
+      const blogPostData = await BlogPost.findAll();
+      res.status(200).json(blogPostData);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log('An Error Occured.');
+      console.log(err);
+      console.log(req.body);
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    try {
+      const blogPostData = await BlogPost.findByPk(req.params.id)
+      res.status(200).json(blogPostData);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log('An Error Occured.');
+      console.log(err);
+      console.log(req.body);
+    }
+});
+
 router.post('/addblogpost', async (req, res) => {
     try {
       const blogPostData = await BlogPost.create({
@@ -21,12 +47,14 @@ router.post('/addblogpost', async (req, res) => {
 router.put('/updateblogpost', async (req, res) => {
 try {
     const blogPostData = await BlogPost.update({
-    title: req.body.title,
-    content: req.body.content
+        title: req.body.title,
+        content: req.body.content
     },
-    where: {
-    id: req.body.id
-    })
+    {
+        where: {
+        id: req.body.id
+        }
+    });
 } catch (err) {
     res.status(500).json(err);
     console.log('An Error Occured.');

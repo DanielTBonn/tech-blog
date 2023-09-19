@@ -10,6 +10,9 @@ module.exports = {
         // return author.username;
         // console.log(userData)
     },
+    // checkUser: async (user_id) {
+    //     const blogPostData = await BlogPost
+    // }
     format_date: (date) => {
         return date.toLocaleDateString();
       }

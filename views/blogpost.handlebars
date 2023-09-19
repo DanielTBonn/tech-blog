@@ -1,5 +1,7 @@
-<div class="card" id="{{id}}">
-<div class="info-storage" id="{{id}}"></div>
+<div class="card" >
+    {{#if checkId}}
+    {{> update-blogpost-details}}
+    {{/if}}
         <header class="card"><h3 id="card-h3">{{blogPost.title}}</h3><p id="card-p">Posted by place_holder on {{format_date blogPost.date_posted}}</p></header>
         <div class="card-body">{{blogPost.content}}</div>
         {{#if blogPost.comments}}

@@ -99,10 +99,21 @@ router.get('/blogpost/:id', withAuth, async (req, res) => {
       ]
     });
     const blogPost = blogPostData.get({ plain: true});
+    console.log(blogPost)
+    console.log(blogPost.user_id)
+
+    
+    let checkId = false;
+    if (req.session.user_id === blogPost.user_id) {
+      checkId = true;
+    }
+
+    console.log(checkId);
 
     res.render('blogpost', {
       blogPost,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      checkId
     })
     // res.status(200).json(blogPost)
   } catch (err) {

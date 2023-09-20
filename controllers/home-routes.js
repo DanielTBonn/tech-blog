@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, BlogPost, Comment } = require('../models');
-const { getAuthor } = require('../utils/helpers');
+// const { getAuthor } = require('../utils/helpers');
 const withAuth  = require('../utils/auth')
 
 // GET all blogpost for homepage
@@ -66,6 +66,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
+    console.log(user);
     // console.log(user);
     res.render('dashboard', { 
       // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
@@ -100,15 +101,11 @@ router.get('/blogpost/:id', withAuth, async (req, res) => {
     });
     const blogPost = blogPostData.get({ plain: true});
     console.log(blogPost)
-    console.log(blogPost.user_id)
 
-    
     let checkId = false;
     if (req.session.user_id === blogPost.user_id) {
       checkId = true;
     }
-
-    console.log(checkId);
 
     res.render('blogpost', {
       blogPost,
@@ -122,19 +119,6 @@ router.get('/blogpost/:id', withAuth, async (req, res) => {
     console.log(err);
   }
 })
-// // GET one painting
-// router.get('/painting/:id', async (req, res) => {
-//   try {
-//     const dbPaintingData = await Painting.findByPk(req.params.id);
-
-//     const painting = dbPaintingData.get({ plain: true });
-//     // TODO: Send over the 'loggedIn' session variable to the 'homepage' template
-//     res.render('painting', { painting, loggedIn: req.session.loggedIn });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
 router.get('/addblogpost', withAuth, async(req, res) => {
   try {
@@ -173,6 +157,17 @@ router.get('/updateblogpost/:id', withAuth, async(req, res) => {
       blogPost,
       logged_in: req.session.logged_in
     });
+  } catch (err) {
+    res.status(500).json(err);
+    console.log('There was an error.')
+    console.log(err);
+  }
+})
+
+router.get('/deleteblogpost', withAuth, async(req, res) => {
+
+  try{
+    res.render('deleteblogpost');
   } catch (err) {
     res.status(500).json(err);
     console.log('There was an error.')

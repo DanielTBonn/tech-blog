@@ -45,30 +45,53 @@ router.post('/addblogpost', async (req, res) => {
   });
 
 router.put('/updateblogpost', async (req, res) => {
-try {
-    const blogPostData = await BlogPost.update({
-        title: req.body.title,
-        content: req.body.content
-    },
-    {
-        where: {
-        id: req.body.id
+    try {
+        const blogPostData = await BlogPost.update({
+            title: req.body.title,
+            content: req.body.content
+        },
+        {
+            where: {
+            id: req.body.id
+            }
+        });
+
+        if (!blogPostData) {
+            res.status(404).json({"message": "No blogposts with this id." });
+            return;
         }
-    });
+        console.log("Successfully updated!")
+        res.status(200).json(blogPostData);
 
-    if (!blogPostData) {
-        res.status(404).json({"message": "No blogposts with this id." });
-        return;
-      }
-      console.log("Successfully updated!")
-      res.status(200).json(blogPostData);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log('An Error Occured.');
+        console.log(err);
+        console.log(req.body);
+    }
+});
 
-} catch (err) {
-    res.status(500).json(err);
-    console.log('An Error Occured.');
-    console.log(err);
-    console.log(req.body);
-}
+router.delete('/deleteblogpost/:id', async (req, res) => {
+    try {
+        const blogPostData = await BlogPost.destroy({
+            where: {
+            id: req.params.id
+            }
+        });
+
+        if (!blogPostData) {
+            res.status(404).json({"message": "No blogposts with this id." });
+            return;
+        }
+        console.log("Successfully deleted!")
+        res.status(200).json(blogPostData);
+
+    } catch (err) {
+        res.status(500).json(err);
+        console.log('An Error Occured.');
+        console.log(err);
+        console.log(req.body);
+    }
 });
 
 module.exports = router;

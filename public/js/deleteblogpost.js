@@ -31,12 +31,6 @@ const deleteFormHandler = async (event) => {
     
 };
 
-const delbtn = document
+document
     .querySelector('.delete-btn')
-
-delbtn.addEventListener('click', deleteFormHandler);
-
-console.log(delbtn)
-// document
-//     .querySelector('.delete-btn')
-//     .addEventListener('click', deleteFormHandler);
+    .addEventListener('click', deleteFormHandler);

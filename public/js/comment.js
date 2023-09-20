@@ -2,14 +2,11 @@ const commentFormHandler = async (event) => {
     event.preventDefault();
 
     // const blogId = document.querySelector('div[class~="info-storage"');
-    let currentUrl = await window.location.href;
-    let blogId = await currentUrl.split('/').at(-1)
+    const currentUrl = await window.location.href;
+    const blogId = await currentUrl.split('/').at(-1)
     console.log(blogId)
     // console.log(typeof this.href.substring(this.href.lastIndexOf('/') + 1));
     const comment = document.querySelector('#comment-content').value.trim();
-
-    console.log(comment);
-    console.log()
 
     if (comment) {
         const response = await fetch('/api/users/comment', {

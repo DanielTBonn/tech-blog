@@ -8,7 +8,13 @@ module.exports = {
         })
         // const author = userData.get({ plain: true});
         // return author.username;
-        console.log(userData)
-    }
+        // console.log(userData)
+    },
+    // checkUser: async (user_id) {
+    //     const blogPostData = await BlogPost
+    // }
+    format_date: (date) => {
+        return date.toLocaleDateString();
+      }
 
 };

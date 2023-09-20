@@ -16,6 +16,7 @@ const blogPostFormHandler = async (event) => {
 
         if (response.ok) {
             console.log("Successfully created a blogpost");
+            window.location = '/dashboard'
         } else {
             alert('Could not create blogpost');
         }

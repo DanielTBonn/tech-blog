@@ -1,10 +1,9 @@
+// makes a post request to add a user to the database
 const signupFormHandler = async (event) => {
     event.preventDefault();
 
     const username = document.querySelector('#username-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
-
-    console.log(username)
 
     if (username && password) {
     const response = await fetch('/api/users', {

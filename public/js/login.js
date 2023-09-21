@@ -1,3 +1,4 @@
+// create a session with a valid user and password
 const loginFormHandler = async (event) => {
   event.preventDefault();
 

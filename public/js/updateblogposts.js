@@ -1,3 +1,4 @@
+// makes a put request to update a blogpost
 const blogPostFormHandler = async (event) => {
     event.preventDefault();
 
@@ -6,10 +7,6 @@ const blogPostFormHandler = async (event) => {
 
     const currentUrl = await window.location.href;
     const blogId = await currentUrl.split('/').at(-1)
-    console.log(blogId)
-
-    console.log('title: ', title)
-    console.log('content: ', content)
 
     if (title && content) {
         const response = await fetch('/api/blogpost/updateblogpost', {

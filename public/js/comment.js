@@ -1,11 +1,9 @@
+// adds a comment to a blogpost
 const commentFormHandler = async (event) => {
     event.preventDefault();
 
-    // const blogId = document.querySelector('div[class~="info-storage"');
     const currentUrl = await window.location.href;
     const blogId = await currentUrl.split('/').at(-1)
-    console.log(blogId)
-    // console.log(typeof this.href.substring(this.href.lastIndexOf('/') + 1));
     const comment = document.querySelector('#comment-content').value.trim();
 
     if (comment) {

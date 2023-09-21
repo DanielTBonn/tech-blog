@@ -165,6 +165,13 @@ img {
   display: block;
   font-size: 0.75rem;
   text-indent: 25px;
+  color: lightslategray;
+}
+
+.center-btn {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
 }
 
 .gallery-name {

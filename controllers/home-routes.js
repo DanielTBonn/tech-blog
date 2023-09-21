@@ -140,7 +140,7 @@ router.get('/updateblogpost/:id', withAuth, async(req, res) => {
           model: Comment,
           attributes: [
             'content',
-            'date_posted',
+            'createdAt',
             'user_id'
           ]
         }

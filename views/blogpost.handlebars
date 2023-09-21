@@ -1,7 +1,9 @@
 <div class="card" >
     {{#if checkId}}
+    <div class="center-btn">
     {{> update-blogpost-details}}
     {{> delete-blogpost-button}}
+    </div>
     {{/if}}
         <header class="card"><h3 id="card-h3">{{blogPost.title}}</h3><p id="card-p">Posted by {{blogPost.username}} on {{format_date blogPost.createdAt}}</p></header>
         <div class="card-body">{{blogPost.content}}</div>

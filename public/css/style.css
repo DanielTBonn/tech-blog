@@ -171,6 +171,9 @@ img {
 .center-btn {
   display: flex;
   justify-content: center;
+}
+
+.padding-addblogpost {
   padding-top: 1.5rem;
 }
 

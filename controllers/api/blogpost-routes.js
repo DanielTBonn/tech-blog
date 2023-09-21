@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { BlogPost } = require('../../models');
+const { User, BlogPost } = require('../../models');
 
 
 
@@ -29,11 +29,19 @@ router.get('/:id', async (req, res) => {
 
 router.post('/addblogpost', async (req, res) => {
     try {
+      const username = await User.findByPk(req.session.user_id, {
+        attributes: [
+          "username"
+        ]
+      });
+      const user = username.get({ plain: true });
+
+      console.log("THIS IS A USERNAME", user.username);
       const blogPostData = await BlogPost.create({
         title: req.body.title,
         content: req.body.content,
-        date_posted: '9/14/2023',
         user_id: req.session.user_id,
+        username: user.username
       });
       res.status(200).json(blogPostData);
     } catch (err) {

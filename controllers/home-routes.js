@@ -19,8 +19,9 @@ router.get('/', async (req, res) => {
           model: Comment,
           attributes: [
             'content',
-            'date_posted',
-            'user_id'
+            'username',
+            'user_id',
+            'createdAt'
           ]
         }
       ]
@@ -59,7 +60,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
             'id',
             'title',
             'content',
-            'date_posted',
+            'username',
+            'createdAt',
           ],
         },
       ],
@@ -93,7 +95,7 @@ router.get('/blogpost/:id', async (req, res) => {
           model: Comment,
           attributes: [
             'content',
-            'user_id',
+            'username',
             'createdAt'
           ]
         }

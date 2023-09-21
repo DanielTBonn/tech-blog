@@ -84,9 +84,17 @@ router.post('/logout', (req, res) => {
 
 router.post('/comment', withAuth, async (req, res) => {
     try {
+
+        const username = await User.findByPk(req.session.user_id, {
+          attributes: [
+            "username"
+          ]
+        });
+        const user = username.get({ plain: true });
+
         const commentData = await Comment.create({
             content: req.body.comment,
-            date_posted: '9/14/2023',
+            username: user.username,
             user_id: req.session.user_id,
             blogpost_id: req.body.blogId
         });
@@ -99,9 +107,5 @@ router.post('/comment', withAuth, async (req, res) => {
     }
      
 })
-
-
-
-
 
 module.exports = router;

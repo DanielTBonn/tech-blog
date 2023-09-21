@@ -19,8 +19,9 @@ BlogPost.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        date_posted: {
-            type: DataTypes.DATE,
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         user_id: {
             type: DataTypes.INTEGER,

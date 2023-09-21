@@ -8,17 +8,19 @@ BlogPost.belongsTo(User, {
     onDelete: 'CASCADE'
 });
 
-// user has many blogposts 
+// User has many blogposts 
 User.hasMany(BlogPost, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 });
 
+// Comment belongs to user
 Comment.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 })
 
+// Blogpost has many comments
 BlogPost.hasMany(Comment, {
     foreignKey: 'blogpost_id',
     onDelete: 'CASCADE'

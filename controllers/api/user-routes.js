@@ -82,6 +82,7 @@ router.post('/logout', (req, res) => {
   }
 });
 
+// POST route for comment
 router.post('/comment', withAuth, async (req, res) => {
     try {
 

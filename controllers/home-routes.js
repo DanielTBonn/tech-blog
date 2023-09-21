@@ -30,11 +30,6 @@ router.get('/', async (req, res) => {
     const blogPosts = blogPostData.map((blogpost) =>
     blogpost.get({ plain: true})
     );
-    
-    // console.log(blogPosts);
-    // console.log(blogPosts[0].comments[0].user_id);
-    // const author =  await getAuthor(blogPosts[0].comments[0].user_id);
-    // console.log('AUTHOR: ',author)
 
     res.render('homepage'
     , 
@@ -68,10 +63,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-    console.log(user);
-    // console.log(user);
     res.render('dashboard', { 
-      // TODO: Send over the 'loggedIn' session variable to the 'gallery' template
       user,
       logged_in: req.session.logged_in
     });
@@ -81,6 +73,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+
+// GET blogpost by id
 router.get('/blogpost/:id', async (req, res) => {
   try {
     const blogPostData = await BlogPost.findByPk(req.params.id, {
@@ -102,7 +96,6 @@ router.get('/blogpost/:id', async (req, res) => {
       ]
     });
     const blogPost = blogPostData.get({ plain: true});
-    console.log(blogPost)
 
     let checkId = false;
     if (req.session.user_id === blogPost.user_id) {
@@ -113,25 +106,26 @@ router.get('/blogpost/:id', async (req, res) => {
       blogPost,
       logged_in: req.session.logged_in,
       checkId
-    })
-    // res.status(200).json(blogPost)
+    });
   } catch (err) {
     res.status(500).json(err);
-    console.log('There was an error.')
+    console.log('There was an error.');
     console.log(err);
   }
 })
 
+// routes to a page that allows the user to add a blogpost
 router.get('/addblogpost', withAuth, async(req, res) => {
   try {
     res.render('addblogpost');
   } catch (err) {
     res.status(500).json(err);
-    console.log('There was an error.')
+    console.log('There was an error.');
     console.log(err);
   }
 })
 
+// routes to the page requesting to update a blogpost by the user
 router.get('/updateblogpost/:id', withAuth, async(req, res) => {
   try {
     const blogPostData = await BlogPost.findByPk(req.params.id, {
@@ -161,26 +155,24 @@ router.get('/updateblogpost/:id', withAuth, async(req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    console.log('There was an error.')
+    console.log('There was an error.');
     console.log(err);
   }
 })
 
+// routes to the delete blogpost page
 router.get('/deleteblogpost', withAuth, async(req, res) => {
-
   try{
     res.render('deleteblogpost');
   } catch (err) {
     res.status(500).json(err);
-    console.log('There was an error.')
+    console.log('There was an error.');
     console.log(err);
   }
 })
 
-// // Login route
+// Login route
 router.get('/login', (req, res) => {
-  // TODO: Add a comment describing the functionality of this if statement
-  // redirects you to homepage if logged_in is true, otherwise renders /login page
   if (req.session.logged_in) {
     res.redirect('/');
     return;
@@ -189,6 +181,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// Sign up route
 router.get('/signup', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');

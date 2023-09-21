@@ -10,13 +10,12 @@
         {{#if blogPost.comments}}
 </div>
 <div class="card" >
-
-        <div class="card-body">
-            {{#each blogPost.comments as |comment|}}
-            <p class="comment-body">{{comment.content}} <span class="comment-subtext">Posted on {{format_date comment.createdAt}} by {{comment.username}}</span></p>
-            {{/each}}
-        </div>
-        {{/if}} 
+    <div class="card-body">
+        {{#each blogPost.comments as |comment|}}
+        <p class="comment-body">{{comment.content}} <span class="comment-subtext">Posted on {{format_date comment.createdAt}} by {{comment.username}}</span></p>
+        {{/each}}
+    </div>
+    {{/if}} 
     {{#if blogPost}}
     {{> comment-form}}
     {{/if}}

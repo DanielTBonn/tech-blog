@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const { User, BlogPost } = require('../../models');
 
-
-
+// GET route for all blogposts
 router.get('/', async (req, res) => {
     try {
       const blogPostData = await BlogPost.findAll();
@@ -15,6 +14,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET route for blogpost by id
 router.get('/:id', async (req, res) => {
     try {
       const blogPostData = await BlogPost.findByPk(req.params.id)
@@ -27,6 +27,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// POST route for adding a blogpost
 router.post('/addblogpost', async (req, res) => {
     try {
       const username = await User.findByPk(req.session.user_id, {
@@ -52,6 +53,7 @@ router.post('/addblogpost', async (req, res) => {
     }
   });
 
+// POST route for updating a blogpost
 router.put('/updateblogpost', async (req, res) => {
     try {
         const blogPostData = await BlogPost.update({
@@ -79,6 +81,7 @@ router.put('/updateblogpost', async (req, res) => {
     }
 });
 
+// DELETE route for deleting a blogpost
 router.delete('/deleteblogpost/:id', async (req, res) => {
     try {
         const blogPostData = await BlogPost.destroy({

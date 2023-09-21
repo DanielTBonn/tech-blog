@@ -9,11 +9,11 @@
 </div>
 <div class="card" >
 
-        <footer>
+        <div class="card-body">
             {{#each blogPost.comments as |comment|}}
-            <p>{{comment.content}} Posted on {{format_date comment.createdAt}} by {{comment.username}}</p>
+            <p class="comment-body">{{comment.content}} <span class="comment-subtext">Posted on {{format_date comment.createdAt}} by {{comment.username}}</span></p>
             {{/each}}
-        </footer>
+        </div>
         {{/if}} 
     {{#if blogPost}}
     {{> comment-form}}

@@ -150,11 +150,21 @@ img {
 
 }
 
-
 .card-body {
   font-size: 1.4rem;
   text-align: left;
-  font-weight: bold;
+  font-weight: normal;
+  margin: 1rem 0 1rem 1rem;
+}
+
+.comment-body {
+  display: block;
+}
+
+.comment-subtext {
+  display: block;
+  font-size: 0.75rem;
+  text-indent: 25px;
 }
 
 .gallery-name {

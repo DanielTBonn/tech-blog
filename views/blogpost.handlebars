@@ -3,12 +3,15 @@
     {{> update-blogpost-details}}
     {{> delete-blogpost-button}}
     {{/if}}
-        <header class="card"><h3 id="card-h3">{{blogPost.title}}</h3><p id="card-p">Posted by {{blogPost.user.username}} on {{format_date blogPost.date_posted}}</p></header>
+        <header class="card"><h3 id="card-h3">{{blogPost.title}}</h3><p id="card-p">Posted by {{blogPost.user.username}} on {{format_date blogPost.createdAt}}</p></header>
         <div class="card-body">{{blogPost.content}}</div>
         {{#if blogPost.comments}}
+</div>
+<div class="card" >
+
         <footer>
             {{#each blogPost.comments as |comment|}}
-            <p>{{comment.content}} {{format_date comment.date_posted}} by {{getAuthor comment.user_id}}</p>
+            <p>{{comment.content}} {{format_date comment.createdAt}} by {{getAuthor comment.user_id}}</p>
             {{/each}}
         </footer>
         {{/if}} 

@@ -93,8 +93,8 @@ router.get('/blogpost/:id', async (req, res) => {
           model: Comment,
           attributes: [
             'content',
-            'date_posted',
-            'user_id'
+            'user_id',
+            'createdAt'
           ]
         }
       ]

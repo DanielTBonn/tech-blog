@@ -4,7 +4,8 @@ const Comment = require('./Comment');
 
 // BlogPost has one User
 BlogPost.belongsTo(User, {
-    foreignKey: 'user_id',
+    foreignKey: 'id',
+    unique: true,
     onDelete: 'CASCADE'
 });
 

@@ -30,7 +30,7 @@ BlogPost.init(
             type: DataTypes.INTEGER,
             unique: true,
             references: {
-                model: User,
+                model: 'user',
                 key: 'id',
             }
         }
@@ -40,7 +40,13 @@ BlogPost.init(
         timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'blogpost'
+        modelName: 'blogpost',
+        indexes: [
+            {
+                unique: true,
+                fields: ['id', 'user_id']
+            }
+        ]
     }
 );
 

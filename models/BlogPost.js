@@ -24,12 +24,11 @@ BlogPost.init(
         },
         username: {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false
         },
         user_id: {
             type: DataTypes.INTEGER,
-            primaryKey: true,
+            unique: true,
             references: {
                 model: User,
                 key: 'id',

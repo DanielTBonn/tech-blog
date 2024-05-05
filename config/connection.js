@@ -4,7 +4,10 @@ require('dotenv').config();
 let sequelize;
 
 if (process.env.DB_URL) {
-  sequelize = new Sequelize(process.env.DB_URL);
+  sequelize = new Sequelize(process.env.DB_URL,
+  {
+    dialetc: process.env.DB_DIALECT
+  });
 } else {
   sequelize = new Sequelize(
     process.env.DB_NAME,

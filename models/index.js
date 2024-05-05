@@ -5,12 +5,14 @@ const Comment = require('./Comment');
 // BlogPost has one User
 BlogPost.belongsTo(User, {
     foreignKey: 'user_id',
+    unique: true,
     onDelete: 'CASCADE'
 });
 
 // User has many blogposts 
 User.hasMany(BlogPost, {
     foreignKey: 'user_id',
+    unique: true,
     onDelete: 'CASCADE'
 });
 

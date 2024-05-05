@@ -1,6 +1,7 @@
 // Blogpost model for sql
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const User = require('./User')
 
 class BlogPost extends Model {}
 
@@ -21,10 +22,6 @@ BlogPost.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        dummyvar: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         username: {
             type: DataTypes.STRING,
             unique: true,
@@ -34,7 +31,7 @@ BlogPost.init(
             type: DataTypes.INTEGER,
             unique: true,
             references: {
-                model: 'user',
+                model: User,
                 key: 'id',
             }
         }
